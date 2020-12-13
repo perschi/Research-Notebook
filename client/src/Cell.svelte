@@ -6,8 +6,8 @@ export let cell_file;
 <style>
 	.text[contenteditable] {
 		grid-area: wrk;
-		width: 99%;
 		min-height: 4em;
+		width: 97%;
 		background-color: lightyellow;
 		border: 1px solid #aaa;
 		border-radius: 2px;
@@ -22,13 +22,12 @@ export let cell_file;
 		border: 1px solid black;
 		margin: 2px;
 		padding: 4px;
-		
 		display: grid;
-		grid-template-columns: 5% 10% 5% 10% 70%;
+		grid-template-columns: 4% 10% 15% 3% 10% 59%;
 		grid-template-rows: auto;
 		grid-template-areas: 
-		"label1 text1 label2 text2 type"
-		"wrk wrk wrk wrk wrk";
+		"label1 text1 type label2 text2 ."
+		"wrk wrk wrk wrk wrk wrk";
 	}
 
 	.normal{
@@ -51,17 +50,22 @@ export let cell_file;
 	}
 	.Type{
 		grid-area: type;
-		width: 20%;
 	}
 
 </style>
 
 <div class="cell">
+	{#if cell_type!=='File'}
 	<div class="ID normal">ID :</div>
 	<input class="ID_txt normal" placeholder="Default" bind:value={cell_id}>
-	<div class="File label normal">File : </div>
-	<input class="File_txt normal" placeholder="index.txt" bind:value={cell_file}>
+	{/if}
+	{#if cell_type==='File'}
+	<div class="ID normal">File : </div>
+	<input class="ID_txt normal" placeholder="index.txt" bind:value={cell_file}>
+	{/if}
+
 	<select bind:value={cell_type} class="Type normal">
+				<option value=File> File </option>
 				<option value=Markdown> Markdown</option>
 				<option value=Media> Media </option>
 				<option value=Code> Code </option>
