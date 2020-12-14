@@ -15,6 +15,12 @@ import { onMount } from 'svelte';
     {id:'Undefined', text:'2', type: 'Code', file: 'index.txt', dirty: false}]},
    {name:'File2', type:'file', content:[{id:'Undefined',text:'4', type: 'Markdown', file: 'index.txt', dirty: false}]}];
 
+   function openFile(path){
+      fetch("./file/".concat('path'))
+      .then(respones => respones.json())
+      .then(doc => documents = documents.concat(doc));
+   }
+
    let selected_document = 0;
 
    

@@ -1,5 +1,5 @@
 from flask import Flask, send_from_directory
-import random
+import json
 
 app = Flask(__name__)
 
@@ -30,6 +30,13 @@ def send_filetree():
             "sub_directories": []}
         ]
     }
+
+
+@app.route("/file/<path:subpath>")
+def load_file(subpath):
+    print(json.dumps({"name": 'File2', str(subpath): 'file', "content": [
+          {"id": 'Undefined', "text": '4', "type": 'Markdown', "file": 'index.txt', "dirty": False}]}))
+    return json.dumps({"name": str(subpath), 'type': 'file', "content": [{"id": 'Undefined', "text": '4', "type": 'Markdown', "file": 'index.txt', "dirty": False}]})
 
 if __name__ == "__main__":
     app.run(debug=True)
