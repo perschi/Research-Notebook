@@ -51,6 +51,13 @@ import { each } from 'svelte/internal';
    border: 1px solid black;
    margin-right: 10px;
 }
+.tab_active{
+   float: left;
+   background-color: rgb(128, 73, 73);
+   padding-right: 10px;
+   border: 1px solid black;
+   margin-right: 10px;
+}
 .tab:hover {
    background-color: greenyellow;
 }
@@ -65,7 +72,7 @@ import { each } from 'svelte/internal';
     <th style="width:20%">Files</th>
     <th style="width:80%">
        {#each documents as {name}, i}
-    <div class="tab" on:click={() => selectDocument({i})}>{name}</div>
+    <div class={i===selected_document ?"tab_active" : "tab"} on:click={() => selectDocument({i})}>{name}</div>
        {/each}
 
     </th>
