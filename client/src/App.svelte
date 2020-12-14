@@ -1,8 +1,15 @@
 <script>
 import { each } from 'svelte/internal';
+import { onMount } from 'svelte';
 
    import Cell from './Cell.svelte';
    import FileTree from './FileTree.svelte';
+   let file_tree = {sub_directories:[]};
+   onMount(async () => {
+		const res = await fetch("./filetree");
+		file_tree = await res.json();
+	});
+
 
    let documents = [{name:'File1', type:'file', content:[{id:'Undefined',text:'1', type: 'Markdown', file: 'index.txt', dirty: false},
     {id:'Undefined', text:'2', type: 'Code', file: 'index.txt', dirty: false}]},
@@ -10,21 +17,9 @@ import { each } from 'svelte/internal';
 
    let selected_document = 0;
 
-    let file_tree = {
-       name:'directory',
-       depth: 0,
-       type: 'directory',
-       sub_directories:[
-          {name:'directory2',
-          type: 'directory',
-          depth:1,
-         sub_directories: []},
-         {name:'File1',
-         depth:1,
-         type:'file',
-         sub_directories: []}
-       ]
-    };
+   
+    
+    
 
    function addCell(){
       documents[selected_document].content = documents[selected_document].content.concat({

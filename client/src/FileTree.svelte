@@ -31,6 +31,8 @@
 
     {#each file_tree.sub_directories as {name, sub_directories, depth}}
         <div class="highlight element" style="padding-left: {(depth + 1) * 4}px;"> {name} </div> 
+        {:else}
+        loading...
     {/each}
 
 </div>
